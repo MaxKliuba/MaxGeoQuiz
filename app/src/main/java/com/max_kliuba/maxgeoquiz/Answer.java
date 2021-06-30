@@ -8,7 +8,7 @@ public class Answer implements Serializable {
     private static final int CORRECT_ANSWER = 2;
     private static final int CHEAT_ANSWER = 3;
 
-    private int userAnswer;
+    private int mUserAnswer;
 
     public Answer() {
         reset();
@@ -23,7 +23,7 @@ public class Answer implements Serializable {
     }
 
     public int getUserAnswer() {
-        return userAnswer;
+        return mUserAnswer;
     }
 
     public boolean isUserAnswerCorrect() {
@@ -43,7 +43,7 @@ public class Answer implements Serializable {
     }
 
     public void setUserAnswer(int currentAnswer) {
-        userAnswer = currentAnswer;
+        mUserAnswer = currentAnswer;
     }
 
     public boolean checkUserAnswer(boolean currentAnswer, boolean correctAnswer) {
