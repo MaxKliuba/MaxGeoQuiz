@@ -10,7 +10,6 @@ public class Answer implements Serializable {
 
     private int userAnswer;
 
-
     public Answer() {
         reset();
     }
@@ -19,27 +18,20 @@ public class Answer implements Serializable {
         setUserAnswer(NO_ANSWER);
     }
 
-    public void setUserAnswer(int currentAnswer) {
-        userAnswer = currentAnswer;
+    public boolean hasUserAnswer() {
+        return getUserAnswer() != NO_ANSWER;
     }
 
     public int getUserAnswer() {
         return userAnswer;
     }
 
-    public boolean hasUserAnswer() {
-        return getUserAnswer() != NO_ANSWER;
-    }
-
     public boolean isUserAnswerCorrect() {
         return getUserAnswer() == CORRECT_ANSWER;
     }
 
-    public boolean checkUserAnswer(boolean currentAnswer, boolean correctAnswer) {
-        int answer = currentAnswer == correctAnswer ? CORRECT_ANSWER : INCORRECT_ANSWER;
-        setUserAnswer(answer);
-
-        return isUserAnswerCorrect();
+    public boolean isUserAnswerIncorrect() {
+        return getUserAnswer() == INCORRECT_ANSWER;
     }
 
     public boolean isCheat() {
@@ -48,5 +40,16 @@ public class Answer implements Serializable {
 
     public void setCheat(boolean cheat) {
         setUserAnswer(CHEAT_ANSWER);
+    }
+
+    public void setUserAnswer(int currentAnswer) {
+        userAnswer = currentAnswer;
+    }
+
+    public boolean checkUserAnswer(boolean currentAnswer, boolean correctAnswer) {
+        int answer = currentAnswer == correctAnswer ? CORRECT_ANSWER : INCORRECT_ANSWER;
+        setUserAnswer(answer);
+
+        return isUserAnswerCorrect();
     }
 }
