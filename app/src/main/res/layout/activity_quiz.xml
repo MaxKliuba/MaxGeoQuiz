@@ -10,7 +10,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
+        android:gravity="center"
         android:padding="24dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         tools:text="[QUESTION]" />
 
     <LinearLayout
@@ -29,12 +32,14 @@
                 android:id="@+id/true_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:text="@string/true_button" />
 
             <Button
                 android:id="@+id/false_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:text="@string/false_button" />
         </LinearLayout>
 
@@ -50,7 +55,8 @@
             android:id="@+id/cheat_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="16sp"
             tools:text="Cheat: 0" />
 
     </LinearLayout>
@@ -61,27 +67,29 @@
         android:layout_gravity="bottom"
         android:layout_margin="20dp">
 
-        <ImageButton
+        <Button
             android:id="@+id/prev_button"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:contentDescription="@string/prev_button"
-            android:src="@drawable/arrow_left" />
+            android:foreground="@drawable/arrow_left"
+            android:foregroundGravity="center" />
 
         <Button
             android:id="@+id/reset_button"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/reset_button" />
 
-        <ImageButton
+        <Button
             android:id="@+id/next_button"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:contentDescription="@string/next_button"
-            android:src="@drawable/arrow_right" />
+            android:foreground="@drawable/arrow_right"
+            android:foregroundGravity="center" />
     </FrameLayout>
 </FrameLayout>

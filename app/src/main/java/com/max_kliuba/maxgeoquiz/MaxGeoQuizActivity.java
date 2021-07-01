@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,8 +21,8 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
-    private ImageButton mNextButton;
-    private ImageButton mPrevButton;
+    private Button mNextButton;
+    private Button mPrevButton;
     private Button mCheatButton;
     private Button mResetButton;
     private TextView mQuestionTextView;
@@ -89,7 +89,7 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
 
         mCheatTextView = (TextView) findViewById(R.id.cheat_textview);
 
-        mPrevButton = (ImageButton) findViewById(R.id.prev_button);
+        mPrevButton = (Button) findViewById(R.id.prev_button);
         mPrevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +98,7 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
             }
         });
 
-        mNextButton = (ImageButton) findViewById(R.id.next_button);
+        mNextButton = (Button) findViewById(R.id.next_button);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +117,10 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
                 }
                 updateQuestion();
                 checkCheatCounter();
+
+                Toast toast = Toast.makeText(MaxGeoQuizActivity.this, getString(R.string.reset_toast), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
             }
         });
 
@@ -176,7 +180,9 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
         if (mAnswers[mCurrentIndex].isCheat()) {
             toastText = String.format("%s (%s)", getString(messageResId), getString(R.string.judgment_toast));
         }
+
         Toast toast = Toast.makeText(MaxGeoQuizActivity.this, toastText, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
 
         setAnswerButtonState(false);
@@ -198,6 +204,7 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
 
         double persent = round(correctAnswerCounter * 100.0 / mAnswers.length, 2);
         Toast toast = Toast.makeText(MaxGeoQuizActivity.this, String.format("%s: %s%%", getString(R.string.result), persent), Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
 

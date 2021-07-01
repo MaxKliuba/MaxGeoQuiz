@@ -17,8 +17,9 @@ public class CheatActivity extends AppCompatActivity {
     private static final String EXTRA_ANSWER_IS_TRUE = "com.max_kliuba.maxgeoquiz.answer_is_true";
     private static final String EXTRA_ANSWER_SHOWN = "com.max_kliuba.maxgeoquiz.answer_shown";
 
-    private TextView mAnswerTextView;
+    private TextView mCheatQuestionTextView;
     private Button mShowAnswerButton;
+    private TextView mAnswerTextView;
     private TextView mApiLevelTextView;
 
     private boolean mAnswerIsTrue;
@@ -30,6 +31,7 @@ public class CheatActivity extends AppCompatActivity {
 
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
+        mCheatQuestionTextView = (TextView) findViewById(R.id.cheat_question_textview);
         mAnswerTextView = (TextView) findViewById(R.id.answer_text_view);
         mShowAnswerButton = (Button) findViewById(R.id.show_answer_button);
         mShowAnswerButton.setOnClickListener(new View.OnClickListener() {
@@ -43,21 +45,51 @@ public class CheatActivity extends AppCompatActivity {
                 setAnswerShownResult(true);
 
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    int cx = mShowAnswerButton.getWidth() / 2;
-                    int cy = mShowAnswerButton.getHeight() / 2;
-                    float radius = mShowAnswerButton.getWidth();
-                    Animator anim = ViewAnimationUtils
-                            .createCircularReveal(mShowAnswerButton, cx, cy, radius, 0);
-                    anim.addListener(new AnimatorListenerAdapter() {
+                    Animator cheatQuestionTextViewAnim = ViewAnimationUtils
+                            .createCircularReveal(mCheatQuestionTextView,
+                                    mCheatQuestionTextView.getWidth() / 2,
+                                    mCheatQuestionTextView.getHeight() / 2,
+                                    mCheatQuestionTextView.getWidth(), 0);
+                    cheatQuestionTextViewAnim.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            mCheatQuestionTextView.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                    cheatQuestionTextViewAnim.start();
+
+                    Animator showAnswerButtonAnim = ViewAnimationUtils
+                            .createCircularReveal(mShowAnswerButton,
+                                    mShowAnswerButton.getWidth() / 2,
+                                    mShowAnswerButton.getHeight() / 2,
+                                    mShowAnswerButton.getWidth(), 0);
+                    showAnswerButtonAnim.addListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             super.onAnimationEnd(animation);
                             mShowAnswerButton.setVisibility(View.INVISIBLE);
                         }
                     });
-                    anim.start();
+                    showAnswerButtonAnim.start();
+
+                    Animator answerTextViewAnim = ViewAnimationUtils
+                            .createCircularReveal(mAnswerTextView,
+                                    mAnswerTextView.getWidth() / 2,
+                                    mAnswerTextView.getHeight() / 2,
+                                    mAnswerTextView.getWidth(), 0);
+                    showAnswerButtonAnim.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            mAnswerTextView.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    answerTextViewAnim.start();
                 } else {
+                    mCheatQuestionTextView.setVisibility(View.INVISIBLE);
                     mShowAnswerButton.setVisibility(View.INVISIBLE);
+                    mAnswerTextView.setVisibility(View.VISIBLE);
                 }
             }
         });
