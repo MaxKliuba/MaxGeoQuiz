@@ -81,9 +81,13 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
         mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean answerIsTrue = mQuestionsBank[mCurrentIndex].isAnswerTrue();
-                Intent intent = CheatActivity.newIntent(MaxGeoQuizActivity.this, answerIsTrue);
-                startActivityForResult(intent, REQUEST_CODE_CHEAT);
+                if (Answer.getCheatCounter() > 0) {
+                    boolean answerIsTrue = mQuestionsBank[mCurrentIndex].isAnswerTrue();
+                    Intent intent = CheatActivity.newIntent(MaxGeoQuizActivity.this, answerIsTrue);
+                    startActivityForResult(intent, REQUEST_CODE_CHEAT);
+                } else {
+                    mCheatButton.setEnabled(false);
+                }
             }
         });
 
@@ -170,7 +174,11 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
     private void setAnswerButtonState(boolean state) {
         mTrueButton.setEnabled(state);
         mFalseButton.setEnabled(state);
-        mCheatButton.setEnabled(state);
+        if (Answer.getCheatCounter() <= 0) {
+            mCheatButton.setEnabled(false);
+        } else {
+            mCheatButton.setEnabled(state);
+        }
     }
 
     private void checkAnswer(boolean userPressedTrue) {
