@@ -5,11 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -29,6 +26,7 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
     private Button mCheatButton;
     private Button mResetButton;
     private TextView mQuestionTextView;
+    private TextView mCheatTextView;
 
     private Question[] mQuestionsBank = new Question[]{
             new Question(R.string.question_australia, true),
@@ -89,6 +87,8 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
             }
         });
 
+        mCheatTextView = (TextView) findViewById(R.id.cheat_textview);
+
         mPrevButton = (ImageButton) findViewById(R.id.prev_button);
         mPrevButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,15 +112,16 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mCurrentIndex = 0;
-
                 for (Answer answer : mAnswers) {
                     answer.reset();
                 }
                 updateQuestion();
+                checkCheatCounter();
             }
         });
 
         updateQuestion();
+        checkCheatCounter();
     }
 
     @Override
@@ -134,7 +135,11 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
             if (data == null) {
                 return;
             }
-            mAnswers[mCurrentIndex].setCheat(CheatActivity.wasAnswerShown(data));
+
+            if (CheatActivity.wasAnswerShown(data)) {
+                mAnswers[mCurrentIndex].setCheat(true);
+            }
+            checkCheatCounter();
         }
     }
 
@@ -151,6 +156,13 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
         setAnswerButtonState(!mAnswers[mCurrentIndex].hasUserAnswer());
     }
 
+    private void checkCheatCounter() {
+        if (Answer.getCheatCounter() <= 0) {
+            mCheatButton.setEnabled(false);
+        }
+        mCheatTextView.setText(String.format("%s: %s", getString(R.string.cheat_textview), Answer.getCheatCounter()));
+    }
+
     private void setAnswerButtonState(boolean state) {
         mTrueButton.setEnabled(state);
         mFalseButton.setEnabled(state);
@@ -159,15 +171,12 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
 
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionsBank[mCurrentIndex].isAnswerTrue();
-        int messageResId;
-
+        int messageResId = mAnswers[mCurrentIndex].checkUserAnswer(userPressedTrue, answerIsTrue) ? R.string.correct_toast : R.string.incorrect_toast;
+        String toastText = getString(messageResId);
         if (mAnswers[mCurrentIndex].isCheat()) {
-            messageResId = R.string.judgment_toast;
-        } else {
-            messageResId = mAnswers[mCurrentIndex].checkUserAnswer(userPressedTrue, answerIsTrue) ? R.string.correct_toast : R.string.incorrect_toast;
+            toastText = String.format("%s (%s)", getString(messageResId), getString(R.string.judgment_toast));
         }
-
-        Toast toast = Toast.makeText(MaxGeoQuizActivity.this, messageResId, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(MaxGeoQuizActivity.this, toastText, Toast.LENGTH_SHORT);
         toast.show();
 
         setAnswerButtonState(false);
@@ -188,9 +197,8 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
         }
 
         double persent = round(correctAnswerCounter * 100.0 / mAnswers.length, 2);
-        Toast toast = Toast.makeText(MaxGeoQuizActivity.this, getString(R.string.result) + persent + "%", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(MaxGeoQuizActivity.this, String.format("%s: %s%%", getString(R.string.result), persent), Toast.LENGTH_LONG);
         toast.show();
-
     }
 
     public static double round(double value, int places) {

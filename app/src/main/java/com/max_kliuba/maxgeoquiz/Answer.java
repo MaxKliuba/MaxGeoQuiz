@@ -6,7 +6,8 @@ public class Answer implements Serializable {
     private static final int NO_ANSWER = 0;
     private static final int INCORRECT_ANSWER = 1;
     private static final int CORRECT_ANSWER = 2;
-    private static final int CHEAT_ANSWER = 3;
+    private boolean mIsCheat;
+    private static int mCheatCounter;
 
     private int mUserAnswer;
 
@@ -16,6 +17,8 @@ public class Answer implements Serializable {
 
     public void reset() {
         setUserAnswer(NO_ANSWER);
+        mIsCheat = false;
+        mCheatCounter = 3;
     }
 
     public boolean hasUserAnswer() {
@@ -35,11 +38,18 @@ public class Answer implements Serializable {
     }
 
     public boolean isCheat() {
-        return getUserAnswer() == CHEAT_ANSWER;
+        return mIsCheat;
     }
 
     public void setCheat(boolean cheat) {
-        setUserAnswer(CHEAT_ANSWER);
+        mIsCheat = cheat;
+        if (cheat) {
+            mCheatCounter--;
+        }
+    }
+
+    public static int getCheatCounter() {
+        return mCheatCounter;
     }
 
     public void setUserAnswer(int currentAnswer) {

@@ -1,29 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical"
     tools:context=".CheatActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="24dp"
-        android:text="@string/warning_text" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:text="@string/warning_text" />
+
+        <TextView
+            android:id="@+id/answer_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:textStyle="bold"
+            tools:text="[ANSWER]" />
+
+        <Button
+            android:id="@+id/show_answer_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_answer_button" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/answer_text_view"
+        android:id="@+id/api_level_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="24dp"
-        android:textStyle="bold"
-        tools:text="[ANSWER]" />
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_margin="10dp"
+        android:textSize="12sp"
+        tools:text="[API LEVEL]" />
 
-    <Button
-        android:id="@+id/show_answer_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/show_answer_button" />
-</LinearLayout>
+</FrameLayout>
