@@ -44,7 +44,7 @@ public class CheatActivity extends AppCompatActivity {
                 }
                 setAnswerShownResult(true);
 
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     Animator cheatQuestionTextViewAnim = ViewAnimationUtils
                             .createCircularReveal(mCheatQuestionTextView,
                                     mCheatQuestionTextView.getWidth() / 2,
