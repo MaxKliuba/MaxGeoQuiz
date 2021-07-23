@@ -4,16 +4,16 @@
     <string name="false_button">FALSE</string>
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">Incorrect!</string>
-    <string name="next_button">NEXT</string>
-    <string name="prev_button">PREV</string>
-    <string name="reset_button">RESET</string>
-    <string name="result">Result</string>
+    <string name="next_button">Next question</string>
+    <string name="prev_button">Previous question</string>
+    <string name="reset_button">Reset</string>
+    <string name="result">Result: %1$s</string>
     <string name="warning_text">Are you sure you want to do this?</string>
     <string name="show_answer_button">Show Answer</string>
     <string name="cheat_button">Cheat!</string>
-    <string name="judgment_toast">Cheating is wrong</string>
-    <string name="cheat_textview">Cheat</string>
-    <string name="api_level">API Level</string>
+    <string name="judgment_toast">%1$s (Cheating is wrong)</string>
+    <string name="cheat_textview">Cheat: %1$d</string>
+    <string name="api_level">API Level: %1$d</string>
     <string name="reset_toast">Reset</string>
 
     <string name="question_australia">Canberra is the capital of Australia.</string>

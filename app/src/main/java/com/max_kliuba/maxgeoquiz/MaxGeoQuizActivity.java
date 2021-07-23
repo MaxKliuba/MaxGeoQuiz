@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MaxGeoQuizActivity extends AppCompatActivity {
+
     private static final String TAG = "MaxGeoQuizActivity";
     private static final String KEY_INDEX = "index";
     private static final String KEY_ANSWER = "answers";
@@ -168,7 +169,7 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
         if (Answer.getCheatCounter() <= 0) {
             mCheatButton.setEnabled(false);
         }
-        mCheatTextView.setText(String.format("%s: %s", getString(R.string.cheat_textview), Answer.getCheatCounter()));
+        mCheatTextView.setText(getString(R.string.cheat_textview, Answer.getCheatCounter()));
     }
 
     private void setAnswerButtonState(boolean state) {
@@ -183,10 +184,11 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
 
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionsBank[mCurrentIndex].isAnswerTrue();
-        int messageResId = mAnswers[mCurrentIndex].checkUserAnswer(userPressedTrue, answerIsTrue) ? R.string.correct_toast : R.string.incorrect_toast;
+        int messageResId = mAnswers[mCurrentIndex]
+                .checkUserAnswer(userPressedTrue, answerIsTrue) ? R.string.correct_toast : R.string.incorrect_toast;
         String toastText = getString(messageResId);
         if (mAnswers[mCurrentIndex].isCheat()) {
-            toastText = String.format("%s (%s)", getString(messageResId), getString(R.string.judgment_toast));
+            toastText = getString(R.string.judgment_toast, getString(messageResId));
         }
 
         Toast toast = Toast.makeText(MaxGeoQuizActivity.this, toastText, Toast.LENGTH_SHORT);
@@ -210,8 +212,9 @@ public class MaxGeoQuizActivity extends AppCompatActivity {
             }
         }
 
-        double persent = round(correctAnswerCounter * 100.0 / mAnswers.length, 2);
-        Toast toast = Toast.makeText(MaxGeoQuizActivity.this, String.format("%s: %s%%", getString(R.string.result), persent), Toast.LENGTH_LONG);
+        double percent = round(correctAnswerCounter * 100.0 / mAnswers.length, 2);
+        Toast toast = Toast.makeText(MaxGeoQuizActivity.this,
+                getString(R.string.result, String.valueOf(percent)), Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }

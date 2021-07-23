@@ -1,5 +1,6 @@
 package com.max_kliuba.maxgeoquiz;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
@@ -8,12 +9,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class CheatActivity extends AppCompatActivity {
+
     private static final String EXTRA_ANSWER_IS_TRUE = "com.max_kliuba.maxgeoquiz.answer_is_true";
     private static final String EXTRA_ANSWER_SHOWN = "com.max_kliuba.maxgeoquiz.answer_shown";
 
@@ -23,6 +26,13 @@ public class CheatActivity extends AppCompatActivity {
     private TextView mApiLevelTextView;
 
     private boolean mAnswerIsTrue;
+
+    public static Intent newIntent(Context packageContext, boolean answerIsTrue) {
+        Intent intent = new Intent(packageContext, CheatActivity.class);
+        intent.putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue);
+
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,14 +105,18 @@ public class CheatActivity extends AppCompatActivity {
         });
 
         mApiLevelTextView = (TextView) findViewById(R.id.api_level_textview);
-        mApiLevelTextView.setText(String.format("%s: %s", getString(R.string.api_level), Build.VERSION.SDK_INT));
+        mApiLevelTextView.setText(getString(R.string.api_level, Build.VERSION.SDK_INT));
     }
 
-    public static Intent newIntent(Context packageContext, boolean answerIsTrue) {
-        Intent intent = new Intent(packageContext, CheatActivity.class);
-        intent.putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue);
-
-        return intent;
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void setAnswerShownResult(boolean isAnswerShown) {

@@ -73,12 +73,10 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:gravity="center"
             android:contentDescription="@string/prev_button"
-            app:icon="@drawable/arrow_left"
+            app:icon="@drawable/ic_navigate_before_24"
             app:iconGravity="textStart"
-            app:iconPadding="5dp"
-            app:iconSize="30dp" />
+            app:iconPadding="0dp" />
 
         <Button
             android:id="@+id/reset_button"
@@ -92,11 +90,9 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:gravity="center"
             android:contentDescription="@string/next_button"
-            app:icon="@drawable/arrow_right"
+            app:icon="@drawable/ic_navigate_next_24"
             app:iconGravity="textEnd"
-            app:iconPadding="0dp"
-            app:iconSize="30dp" />
+            app:iconPadding="0dp" />
     </FrameLayout>
 </FrameLayout>

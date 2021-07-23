@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CheatActivity">
+        <activity android:name=".CheatActivity"
+            android:parentActivityName=".MaxGeoQuizActivity">
             <intent-filter>
                 <action android:name="android.intent.action.maxgeoquiz.CHEAT_ACTIVITY" />
                 <category android:name="android.intent.category.LAUNCHER" />
