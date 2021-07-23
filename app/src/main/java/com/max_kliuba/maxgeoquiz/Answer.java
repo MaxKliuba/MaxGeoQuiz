@@ -1,6 +1,8 @@
 package com.max_kliuba.maxgeoquiz;
 
-public class Answer {
+import java.io.Serializable;
+
+public class Answer implements Serializable {
     private static final int NO_ANSWER = 0;
     private static final int INCORRECT_ANSWER = 1;
     private static final int CORRECT_ANSWER = 2;
