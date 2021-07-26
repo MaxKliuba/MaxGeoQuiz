@@ -1,4 +1,4 @@
-package com.max_kliuba.maxgeoquiz;
+package com.maxclub.android.maxgeoquiz;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.max_kliuba.maxgeoquiz", appContext.getPackageName());
+        assertEquals("com.maxclub.android.maxgeoquiz", appContext.getPackageName());
     }
 }

@@ -1,4 +1,4 @@
-package com.max_kliuba.maxgeoquiz;
+package com.maxclub.android.maxgeoquiz;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

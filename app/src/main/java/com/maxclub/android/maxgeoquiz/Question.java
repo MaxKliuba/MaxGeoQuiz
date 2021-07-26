@@ -1,4 +1,4 @@
-package com.max_kliuba.maxgeoquiz;
+package com.maxclub.android.maxgeoquiz;
 
 public class Question {
     private int mTextResId;

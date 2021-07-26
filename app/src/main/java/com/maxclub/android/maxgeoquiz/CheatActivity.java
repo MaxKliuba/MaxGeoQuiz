@@ -1,4 +1,4 @@
-package com.max_kliuba.maxgeoquiz;
+package com.maxclub.android.maxgeoquiz;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +17,8 @@ import android.widget.TextView;
 
 public class CheatActivity extends AppCompatActivity {
 
-    private static final String EXTRA_ANSWER_IS_TRUE = "com.max_kliuba.maxgeoquiz.answer_is_true";
-    private static final String EXTRA_ANSWER_SHOWN = "com.max_kliuba.maxgeoquiz.answer_shown";
+    private static final String EXTRA_ANSWER_IS_TRUE = "com.maxclub.android.maxgeoquiz.answer_is_true";
+    private static final String EXTRA_ANSWER_SHOWN = "com.maxclub.android.maxgeoquiz.answer_shown";
 
     private TextView mCheatQuestionTextView;
     private Button mShowAnswerButton;
